@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy New Year Animation</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle, #1a1a2e, #16213e, #0f3460);
+        color: white;
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 4rem;
+        margin-top: 20px;
+        color: #ffe600;
+        text-shadow: 0 0 20px #ffe600, 0 0 40px #ff5733, 0 0 60px #c70039;
+        animation: flicker 2s infinite alternate;
+      }
+
+      @keyframes flicker {
+        0% {
+          text-shadow: 0 0 20px #ffe600, 0 0 40px #ff5733, 0 0 60px #c70039;
+        }
+        100% {
+          text-shadow: 0 0 30px #ffe600, 0 0 50px #ff5733, 0 0 70px #c70039;
+        }
+      }
+
+      .names {
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 10px;
+        animation: colorCycle 3s infinite;
+      }
+
+      @keyframes colorCycle {
+        0% {
+          color: #ffdd00;
+        }
+        33% {
+          color: #ff6f61;
+        }
+        66% {
+          color: #9b59b6;
+        }
+        100% {
+          color: #ffdd00;
+        }
+      }
+
+      .message {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-top: 20px;
+        color: #ffffff;
+        font-style: italic;
+      }
+
+      .cracker {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: radial-gradient(circle, white, #ff0000);
+        border-radius: 50%;
+        animation: explode 1.5s infinite ease-out;
+      }
+
+      @keyframes explode {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(
+              calc(-50px + 100px * var(--x)),
+              calc(-50px + 100px * var(--y))
+            )
+            scale(0.2);
+        }
+      }
+
+      .crackers {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: white;
+        border-radius: 50%;
+        animation: sparkleMove 1s infinite;
+      }
+
+      @keyframes sparkleMove {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(3);
+        }
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+        .names {
+          font-size: 1.5rem;
+        }
+        .message {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 2rem;
+        }
+        .names {
+          font-size: 1.2rem;
+        }
+        .message {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Happy New Year!</h1>
+    <div class="names">Koustubh, Yuvraj, Preetam, Priyanka</div>
+    <div class="message">
+      With dedication, hard work, and a touch of luck, let's land those dream
+      jobs!
+    </div>
+
+    <div class="crackers">
+      <!-- Firework Cracker Effect -->
+      <div class="cracker" style="--x: -1; --y: -1; left: 50%; top: 50%"></div>
+      <div class="cracker" style="--x: 1; --y: -1; left: 50%; top: 50%"></div>
+      <div class="cracker" style="--x: -1; --y: 1; left: 50%; top: 50%"></div>
+      <div class="cracker" style="--x: 1; --y: 1; left: 50%; top: 50%"></div>
+      <div
+        class="cracker"
+        style="--x: 0.5; --y: 1.5; left: 50%; top: 50%"
+      ></div>
+      <div
+        class="cracker"
+        style="--x: -0.5; --y: -1.5; left: 50%; top: 50%"
+      ></div>
+    </div>
+
+    <script>
+      function createCracker() {
+        const cracker = document.createElement("div");
+        cracker.classList.add("cracker");
+        cracker.style.setProperty("--x", (Math.random() * 2 - 1).toFixed(2));
+        cracker.style.setProperty("--y", (Math.random() * 2 - 1).toFixed(2));
+        cracker.style.left = `${Math.random() * window.innerWidth}px`;
+        cracker.style.top = `${Math.random() * window.innerHeight}px`;
+        document.querySelector(".crackers").appendChild(cracker);
+        setTimeout(() => cracker.remove(), 1500);
+      }
+
+      function createSparkle() {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.style.left = `${Math.random() * window.innerWidth}px`;
+        sparkle.style.top = `${Math.random() * window.innerHeight}px`;
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1000);
+      }
+
+      setInterval(createCracker, 100); // Increased cracker frequency
+      setInterval(createSparkle, 50); // Increased sparkle frequency
+    </script>
+  </body>
+</html>
